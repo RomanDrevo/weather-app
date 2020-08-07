@@ -1,7 +1,7 @@
 import React from 'react';
 
 import AppLayout from './AppLayout';
-// import WeatherSearch from './WeatherSearch';
+import WeatherSearch from './WeatherSearch';
 
 import * as weatherIcons from '../icons';
 import * as recommendations from '../recommendations';
@@ -15,7 +15,7 @@ export default function Weather(props) {
 
     return (
       <div>
-        {/*<WeatherSearch city={city} onCityChange={onCityChange} error={error} />*/}
+        <WeatherSearch city={city} onCityChange={onCityChange} error={error} />
         <AppLayout
           currentWeather={currentWeather}
           forecast={forecast}

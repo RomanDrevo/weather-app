@@ -1,0 +1,12 @@
+.navbar-wrapper :global{
+  flex-grow: 1;
+  color: #000;
+  .app-logo{
+    width: 160px;
+  }
+  .app-bar {
+    background: transparent;
+    box-shadow: none;
+    position: sticky;
+  }
+}
