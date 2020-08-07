@@ -1,29 +1,13 @@
+import { Card, CardContent, CardHeader, CardMedia, Divider, Typography } from '@material-ui/core';
+import WeatherCardSubheader from '../WeatherCardSubheader';
+import Forecast from '../Forecast';
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardMedia,
-  Divider,
-  Typography,
-  Grid
-} from '@material-ui/core';
-
-import Forecast from './Forecast';
-import WeatherCardSubheader from './WeatherCardSubheader';
+import style from './WeatherCard.module.scss';
 
 const useStyles = makeStyles(theme => ({
-  atmospheric: {
-    fontSize: '28px',
-    padding: '5px'
-  },
   buttons: {
     color: 'black'
-  },
-  card: {
-    minWidth: 600,
-    minHeight: 600
   },
   container: {
     display: 'flex',
@@ -35,9 +19,6 @@ const useStyles = makeStyles(theme => ({
   },
   fullList: {
     width: 'auto'
-  },
-  layout: {
-    marginTop: '20px'
   },
 
   paper: {
@@ -57,47 +38,23 @@ const useStyles = makeStyles(theme => ({
   },
   search: {
     marginTop: '100px'
-  },
-  wi: {
-    color: '#673ab7'
   }
 }));
 
-export default function AppLayout(props) {
-  const classes = useStyles();
-  const { currentWeather, forecast, icon, recommendation } = props;
-
-  return (
-    <div className={classes.layout}>
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <WeatherCard
-            currentWeather={currentWeather}
-            forecast={forecast}
-            icon={icon}
-            recommendation={recommendation}
-          />
-        </Grid>
-      </Grid>
-    </div>
-  );
-}
-
 const WeatherCard = props => {
-  const classes = useStyles();
   const humidity = 'wi wi-humidity';
   const strongWind = 'wi wi-strong-wind';
   const { currentWeather, forecast, icon, recommendation } = props;
 
   return (
-    <Card className={classes.card}>
+    <Card className={style['weather-card-wrapper']}>
       <CardHeader
         title={currentWeather.city + ', ' + currentWeather.country}
         subheader={<WeatherCardSubheader currentWeather={currentWeather} />}
       />
       <CardContent>
         <CardMedia
-          className={`${icon} ${classes.wi}`}
+          className={`${icon} wi`}
           src={icon}
           style={{ fontSize: '128px', float: 'right' }}
         />
@@ -118,16 +75,16 @@ const WeatherCard = props => {
           style={{ paddingTop: '40px' }}
         >
           <span
-            className={`${strongWind} ${classes.wi} ${classes.atmospheric}`}
-           />
+            className={`${strongWind} wi atmospheric`}
+          />
           {currentWeather.wind_speed} km/h Winds{' '}
           <span
-            className={`${humidity} ${classes.wi} ${classes.atmospheric}`}
-           />
+            className={`${humidity} wi atmospheric`}
+          />
           {currentWeather.humidity}% Humidity
         </Typography>
         <Typography
-          className={`${classes.recommendation} recommendation`}
+          className='recommendation'
           color="textPrimary"
           gutterBottom
         >
@@ -139,3 +96,5 @@ const WeatherCard = props => {
     </Card>
   );
 };
+
+export default WeatherCard;

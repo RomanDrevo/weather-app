@@ -1,12 +1,11 @@
 import React from 'react';
+import AppLayout from '../app-layout/AppLayout';
+import WeatherSearch from '../weather-search/WeatherSearch';
+import * as weatherIcons from '../../icons.json';
+import * as recommendations from '../../recommendations.json';
+import style from './Weather.module.scss';
 
-import AppLayout from './AppLayout';
-import WeatherSearch from './WeatherSearch';
-
-import * as weatherIcons from '../icons';
-import * as recommendations from '../recommendations';
-
-export default function Weather(props) {
+const Weather = (props) => {
   const { city, currentWeather, forecast, onCityChange, error } = props;
   if (currentWeather && forecast) {
     const prefix = 'wi wi-';
@@ -26,3 +25,5 @@ export default function Weather(props) {
     );
   }
 }
+
+export default Weather;

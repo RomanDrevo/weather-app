@@ -10,27 +10,17 @@ import {
   Typography
 } from '@material-ui/core';
 import Search from '@material-ui/icons/Search';
-import { makeStyles } from '@material-ui/core/styles';
+import style from './WeatherSearch.module.scss';
 
-import useDebounce from '../use-debounce';
+import useDebounce from '../../use-debounce';
 
-const useStyles = makeStyles(theme => ({
-  error: {
-    color: 'red',
-    padding: '10px'
-  },
-  search: {
-    marginTop: '10px'
-  }
-}));
 
 export default function WeatherSearch(props) {
-  const classes = useStyles();
   const { onCityChange, error } = props;
   const [searchTerm, setSearchTerm] = useState('');
   const [isSearching, setSearching] = useState(false);
   const debouncedSearchTerm = useDebounce(searchTerm, 1000);
-  const hasError = error ? true : false;
+  const hasError = !!error;
 
   const handleSearch = event => {
     setSearching(true);
@@ -45,7 +35,7 @@ export default function WeatherSearch(props) {
   }, [onCityChange, debouncedSearchTerm, isSearching]);
 
   return (
-    <div className={classes.search}>
+    <div className={style['weather-search-wrapper']}>
       <Grid container alignItems="flex-end">
         <Grid item xs={12} style={{ textAlign: 'center' }}>
           <FormControl>
@@ -72,7 +62,7 @@ export default function WeatherSearch(props) {
               }
             />
             {error && (
-              <Typography className={classes.error}>{error}</Typography>
+              <Typography className='error'>{error}</Typography>
             )}
           </FormControl>
         </Grid>

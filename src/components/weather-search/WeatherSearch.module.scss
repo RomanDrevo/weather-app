@@ -1,0 +1,9 @@
+.weather-search-wrapper :global{
+  .search {
+    margin-top: 10px;
+  }
+  .error {
+    color: red;
+    padding: 10px;
+  }
+}

@@ -7,7 +7,7 @@ import { createMuiTheme, Container, ThemeProvider } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import NavBar from "./components/navbar/Navbar";
-import Weather from "./components/Weather";
+import Weather from "./components/weather/Weather";
 
 const App = ({fetchItems}) => {
 
