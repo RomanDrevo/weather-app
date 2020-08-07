@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import PageLayout from './components/PageLayout';
 import style from './css/App.scss';
 import {connect} from 'react-redux';
-import {fetchItems} from './store/actions/registerActions';
 import { createMuiTheme, Container, ThemeProvider } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import NavBar from "./components/navbar/Navbar";
-import Weather from "./components/weather/Weather";
+import NavBar from './components/navbar/Navbar';
+import Weather from './components/weather/Weather';
+import { getCityForecast } from "./store/actions/forecastActions";
+import { getForecastData } from "./store/selector";
 
-const App = ({fetchItems}) => {
+const App = ({getCityForecast}) => {
 
   const [city, setCity] = useState('Jerusalem');
   const [error, setError] = useState(null);
@@ -62,6 +62,11 @@ const App = ({fetchItems}) => {
     }
   });
 
+  const handleOnChange = e => {
+    console.log(e.target.value);
+    getCityForecast(e.target.value);
+  };
+
   if (
     (currentWeather && Object.keys(currentWeather).length) ||
     (forecast && Object.keys(forecast).length)
@@ -70,6 +75,10 @@ const App = ({fetchItems}) => {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <NavBar />
+        <select onChange={handleOnChange}>
+          <option value='ashdod'>Ashdod</option>
+          <option value='berlin'>Berlin</option>
+        </select>
         <Container maxWidth="sm">
           <Weather
             city={city}
@@ -89,23 +98,13 @@ const App = ({fetchItems}) => {
       </div>
     );
   }
-
-  // return (
-  //     <div className={style['app-wrapper']}>
-  //       <PageLayout>
-  //         <div className="main-page-content">
-  //           Main
-  //         </div>
-  //       </PageLayout>
-  //     </div>
-  // );
 };
 
 function handleResponse(response) {
   if (response.ok) {
     return response.json();
   } else {
-    throw new Error("Error: Location " + (response.statusText).toLowerCase());
+    throw new Error('Error: Location ' + (response.statusText).toLowerCase());
   }
 }
 
@@ -175,13 +174,13 @@ function mapDataToWeatherInterface(data) {
 
 const mapStateToProps = state => {
     return {
-        data: state.currData.data,
+        forecastData: getForecastData(state),
     };
 };
 
 function mapDispatchToProps(dispatch) {
     return {
-        fetchItems: () => dispatch(fetchItems())
+      getCityForecast: data => dispatch(getCityForecast(data))
     };
 }
 

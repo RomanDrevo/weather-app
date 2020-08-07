@@ -1,6 +1,8 @@
-import { combineReducers } from "redux";
-import registerReducer from "../reducers/registerReducer";
+import { combineReducers } from 'redux';
+import forecastReducer from './forecastReducer';
+import uIStateReducer from './uIStateReducer';
 
 export default combineReducers({
-  currData: registerReducer
+  uIStateReducer,
+  forecastReducer
 });

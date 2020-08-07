@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardMedia, Divider, Typography } from '@material-ui/core';
-import WeatherCardSubheader from '../WeatherCardSubheader';
-import Forecast from '../Forecast';
+import WeatherCardSubheader from '../weather-card-subheader/WeatherCardSubheader';
+import Forecast from '../forecast/Forecast';
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import style from './WeatherCard.module.scss';
