@@ -1,17 +1,33 @@
 import React  from 'react';
-import { AppBar, Toolbar } from '@material-ui/core';
+import { AppBar, Toolbar, Select, MenuItem } from '@material-ui/core';
+
 import logo from '../../assets/about.png';
 import style from './Navbar.module.scss';
 
 const NavBar = () => {
+
+  const [city, setCity] = React.useState('');
+
+  const handleChange = (event) => {
+    console.log(event.target.value);
+    setCity(event.target.value);
+  };
+
   return (
     <div className={style['navbar-wrapper']}>
-      <AppBar className='app-bar'>
-        <Toolbar variant="dense">
-          <img src={logo} className='app-logo' alt="logo" />
-          <div style={{ flex: '1 1 auto' }} />
-        </Toolbar>
-      </AppBar>
+      <div className='app-bar'>
+        <Select
+          className='select-city'
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={city}
+          onChange={handleChange}
+        >
+          <MenuItem value='ashdod'>Ashdod</MenuItem>
+          <MenuItem value='jerusalem'>Jerusalem</MenuItem>
+          <MenuItem value='haifa'>Haifa</MenuItem>
+        </Select>
+      </div>
     </div>
   );
 };

@@ -1,12 +1,18 @@
 .navbar-wrapper :global{
-  flex-grow: 1;
   color: #000;
+
+  .select-city{
+    min-width: 220px!important;
+  }
+
   .app-logo{
     width: 160px;
   }
   .app-bar {
+    display: flex;
+    justify-content: center;
     background: transparent;
     box-shadow: none;
-    position: sticky;
+    margin-top: 50px;
   }
 }
