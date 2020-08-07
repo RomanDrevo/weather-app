@@ -1,0 +1,12 @@
+const
+  FETCH_ITEMS = 'FETCH_ITEMS',
+  SET_ITEMS = 'SET_ITEMS',
+  ADD_ITEM = 'ADD_ITEM',
+  EDIT_ITEM = 'EDIT_ITEM';
+
+export default {
+  ADD_ITEM,
+  SET_ITEMS,
+  EDIT_ITEM,
+  FETCH_ITEMS
+};
