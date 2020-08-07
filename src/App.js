@@ -8,6 +8,7 @@ import NavBar from './components/navbar/Navbar';
 import Weather from './components/weather/Weather';
 import { getCityForecast } from "./store/actions/forecastActions";
 import { getForecastData } from "./store/selector";
+import WeatherWidget from "./components/weather-widget/WeatherWidget";
 
 const App = ({getCityForecast}) => {
 
@@ -86,6 +87,10 @@ const App = ({getCityForecast}) => {
             forecast={forecast}
             onCityChange={handleCityChange}
             error={error}
+          />
+          <WeatherWidget
+            config={{ location: 'London,UK', unit: 'metric', locale: 'zh-tw' }}
+            forecast={this.forecast}
           />
         </Container>
       </ThemeProvider>

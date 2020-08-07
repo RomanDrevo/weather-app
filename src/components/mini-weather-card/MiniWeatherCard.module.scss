@@ -1,0 +1,21 @@
+.mini-weather-card-wrapper :global{
+  min-width: 20%;
+  .container{
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 0.5rem 0.5rem;
+  }
+  .text{
+    text-align: center;
+    line-height: normal;
+    padding: 0.5rem 0;
+  }
+  .icon{
+    align-self: center;
+    line-height: normal;
+    width: 3rem;
+    height: 3rem;
+  }
+}

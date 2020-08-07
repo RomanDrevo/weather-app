@@ -1,0 +1,14 @@
+.weather-widget-wrapper :global{
+  display: block;
+  margin: 10px 5px;
+  text-align: left;
+  border: 1px solid #dddddd;
+  box-shadow: 3px 3px 3px #aaaaaa;
+  padding: 1rem 1rem;
+  .next-container{
+    display: flex;
+    flex-direction: row;
+    margin-top: 1rem;
+    justify-content: space-around;
+  }
+}
