@@ -6,6 +6,10 @@ import style from './MiniWeatherCard.module.scss';
 const MiniWeatherCard = ({ onClick, forecastList, isSelected, unit, locale }) => {
   if (forecastList !== undefined && forecastList.length > 0) {
     const first = forecastList[0];
+
+    const src = `http://openweathermap.org/img/wn/${first.icon}.png`;
+
+
     const maxAndMin = forecastList.reduce(
       (acc, current) => {
         if (current.temp_max > acc.max) {
@@ -27,7 +31,7 @@ const MiniWeatherCard = ({ onClick, forecastList, isSelected, unit, locale }) =>
               .locale(locale)
               .format('dddd')}
           </div>
-          <img className='icon' src={iconCodeMapping[first.icon]} />
+          <img className='icon' src={src} />
           <div className='text'>
             {Math.round(maxAndMin.max * 10) / 10}&deg;{unit === 'metric' ? 'C' : 'F'}
           </div>

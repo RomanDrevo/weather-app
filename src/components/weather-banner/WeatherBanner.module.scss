@@ -1,0 +1,26 @@
+.weather-banner-wrapper :global{
+  .banner-container{
+    display: flex;
+    flex-direction: row;
+  }
+  .banner-icon{
+    width: 5rem;
+    height: 5rem;
+  }
+  .temperature{
+    font-size: 3rem;
+    margin-left: 0.5rem;
+    font-weight: bold;
+  }
+  .unit{
+    font-size: 1rem;
+    margin-top: 0.7rem;
+  }
+  .detail-container{
+    display: flex;
+    flex-direction: column;
+  }
+  .info-text{
+    text-align: right;
+  }
+}

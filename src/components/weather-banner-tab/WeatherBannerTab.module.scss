@@ -1,0 +1,12 @@
+.weather-banner-tab :global{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  .location-text{
+    font-size: 2rem;
+  }
+  .tab-container{
+    margin: 0.8rem 0.8rem;
+    padding-bottom: 1.5rem;
+  }
+}

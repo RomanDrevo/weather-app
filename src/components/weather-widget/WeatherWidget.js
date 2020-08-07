@@ -1,17 +1,10 @@
 import React from 'react';
 import moment from 'moment';
-import WeatherBannerTab from '../WeatherBannerTab';
+import WeatherBannerTab from '../weather-banner-tab/WeatherBannerTab';
 import MiniWeatherCard from '../mini-weather-card/MiniWeatherCard';
 import style from './WeatherWidget.module.scss';
 
 class WeatherWidget extends React.Component {
-  static renderEmpty() {
-    return (
-      <div>
-        <h3>No forecast!? Check your props data!</h3>
-      </div>
-    );
-  }
 
   constructor(props) {
     super(props);
@@ -42,6 +35,14 @@ class WeatherWidget extends React.Component {
     } else {
       this.state = {};
     }
+  }
+
+  renderEmpty() {
+    return (
+      <div>
+        <h3>No forecast!? Check your props data!</h3>
+      </div>
+    );
   }
 
   render() {

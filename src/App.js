@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import style from './css/App.scss';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { createMuiTheme, Container, ThemeProvider } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import NavBar from './components/navbar/Navbar';
 import Weather from './components/weather/Weather';
-import { getCityForecast } from "./store/actions/forecastActions";
-import { getForecastData } from "./store/selector";
-import WeatherWidget from "./components/weather-widget/WeatherWidget";
+import { getCityForecast } from './store/actions/forecastActions';
+import { getForecastData, getMappedForecast, isLoading } from './store/selector';
+import WeatherWidget from './components/weather-widget/WeatherWidget';
 
-const App = ({getCityForecast}) => {
+const App = ({ getCityForecast, mappedForecastData, isLoading }) => {
 
   const [city, setCity] = useState('Jerusalem');
   const [error, setError] = useState(null);
@@ -63,10 +63,16 @@ const App = ({getCityForecast}) => {
     }
   });
 
+  useEffect(() => {
+    getCityForecast('berlin');
+  }, []);
+
   const handleOnChange = e => {
     console.log(e.target.value);
     getCityForecast(e.target.value);
   };
+
+  if(isLoading) return <div>LOADING...</div>;
 
   if (
     (currentWeather && Object.keys(currentWeather).length) ||
@@ -74,23 +80,23 @@ const App = ({getCityForecast}) => {
   ) {
     return (
       <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <NavBar />
+        <CssBaseline/>
+        <NavBar/>
         <select onChange={handleOnChange}>
           <option value='ashdod'>Ashdod</option>
           <option value='berlin'>Berlin</option>
         </select>
         <Container maxWidth="sm">
-          <Weather
-            city={city}
-            currentWeather={currentWeather}
-            forecast={forecast}
-            onCityChange={handleCityChange}
-            error={error}
-          />
+          {/* <Weather*/}
+          {/*  city={city}*/}
+          {/*  currentWeather={currentWeather}*/}
+          {/*  forecast={forecast}*/}
+          {/*  onCityChange={handleCityChange}*/}
+          {/*  error={error}*/}
+          {/* />*/}
           <WeatherWidget
             config={{ location: 'London,UK', unit: 'metric', locale: 'zh-tw' }}
-            forecast={this.forecast}
+            forecast={mappedForecastData}
           />
         </Container>
       </ThemeProvider>
@@ -98,7 +104,7 @@ const App = ({getCityForecast}) => {
   } else {
     return (
       <div>
-        <CircularProgress color={error ? 'secondary' : 'primary'} />
+        <CircularProgress color={error ? 'secondary' : 'primary'}/>
         {error ? <p>{error}</p> : ''}
       </div>
     );
@@ -178,15 +184,17 @@ function mapDataToWeatherInterface(data) {
 }
 
 const mapStateToProps = state => {
-    return {
-        forecastData: getForecastData(state),
-    };
+  return {
+    forecastData: getForecastData(state),
+    mappedForecastData: getMappedForecast(state),
+    isLoading: isLoading(state)
+  };
 };
 
 function mapDispatchToProps(dispatch) {
-    return {
-      getCityForecast: data => dispatch(getCityForecast(data))
-    };
+  return {
+    getCityForecast: data => dispatch(getCityForecast(data))
+  };
 }
 
-export default  connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
