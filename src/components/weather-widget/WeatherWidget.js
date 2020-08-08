@@ -7,7 +7,7 @@ import { mapForecast } from '../../utils/helpers';
 const WeatherWidget = ({ forecast, config }) => {
 
   const [forecastIdx, setForecastIdx] = useState(0);
-  const [forecastOfDayList, setForecastOfDayList] = useState(mapForecast(forecast));
+  const [forecastOfDayList, ] = useState(mapForecast(forecast));
 
   const renderEmpty = () => {
     return (

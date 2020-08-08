@@ -18,7 +18,7 @@ const WeatherBannerTab = ({ location, forecastOfDay, locale, unit }) => {
 
   useEffect(()=> {
     setMarks(getMarks(forecastOfDay, locale));
-  }, [forecastOfDay]);
+  }, [forecastOfDay, locale]);
 
   const renderTabPanel = (item, unit) => {
     return (

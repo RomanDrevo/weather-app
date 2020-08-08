@@ -29,7 +29,7 @@ const MiniWeatherCard = ({ onClick, forecastList, unit, locale }) => {
               .locale(locale)
               .format('dddd')}
           </div>
-          <img className='icon' src={src} />
+          <img alt='icon' className='icon' src={src} />
           <div className='text'>
             {Math.round(maxAndMin.max * 10) / 10}&deg;{unit === 'metric' ? 'C' : 'F'}
           </div>
