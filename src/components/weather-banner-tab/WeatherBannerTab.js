@@ -1,54 +1,34 @@
 import 'react-tabs/style/react-tabs.css';
 import 'rc-slider/assets/index.css';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Slider from 'rc-slider';
 import Tooltip from 'rc-tooltip';
 import WeatherBanner from '../weather-banner/WeatherBanner';
 import style from './WeatherBannerTab.module.scss';
+import { getMarks } from '../../utils/helpers';
 
-const {Handle} = Slider;
+const { Handle } = Slider;
 
-// const reformanForecastDay = forecastOfDay => {
-//
-//   const marks = {};
-//
-//   forecastOfDay.map((item, index) => {
-//     marks[index] = item.moment.locale(locale).format('a h:mm');
-//   });
-//
-// }
+const WeatherBannerTab = ({ location, forecastOfDay, locale, unit }) => {
 
-class WeatherBannerTab extends React.Component {
-  constructor(props) {
-    super(props);
-    const { location, forecastOfDay, locale } = props;
-    this.marks = {};
-    forecastOfDay.map((item, index) => {
-      this.marks[index] = item.moment.locale(locale).format('a h:mm');
-    });
-    this.state = { location, forecastOfDay, tabIndex: 0, locale };
-  }
+  const [marks, setMarks] = useState(getMarks(forecastOfDay, locale));
+  const [tabIndex, setTabIndex] = useState(0);
 
-  componentWillReceiveProps(nextProps) {
-    const { location, forecastOfDay, locale } = nextProps;
-    this.marks = {};
-    forecastOfDay.forEach((item, index) => {
-      this.marks[index] = item.moment.locale(locale).format('a h:mm');
-    });
-    this.setState({ location, forecastOfDay, tabIndex: 0, locale });
-  }
+  useEffect(()=> {
+    setMarks(getMarks(forecastOfDay, locale));
+  }, [forecastOfDay]);
 
-  renderTabPanel = (item, unit) => {
+  const renderTabPanel = (item, unit) => {
     return (
       <TabPanel key={`tp${item.dt}`}>
-        <WeatherBanner data={item} unit={unit} />
+        <WeatherBanner data={item} unit={unit}/>
       </TabPanel>
     );
-  }
+  };
 
-  renderTab = (item, locale) => {
+  const renderTab = (item, locale) => {
     const localeRegion = locale || 'zh-tw';
     if (item) {
       return (
@@ -60,12 +40,10 @@ class WeatherBannerTab extends React.Component {
         </Tab>
       );
     }
-    return (<div />);
-  }
+    return (<div/>);
+  };
 
-  getMarks() {}
-
-  handle = (props) => {
+  const handle = (props) => {
     const { value, dragging, index, ...restProps } = props;
     return (
       <Tooltip
@@ -78,38 +56,35 @@ class WeatherBannerTab extends React.Component {
         <Handle value={value} {...restProps} />
       </Tooltip>
     );
-  }
+  };
 
-  onSlided(e) {
-    this.setState({ tabIndex: e });
-  }
+  const onSlided = (e) => {
+    setTabIndex(e);
+  };
 
-  render() {
-    const { location, forecastOfDay, tabIndex } = this.state;
-    return (
-      <div className={style['weather-banner-tab']}>
-        <div className='location-text'>{location}</div>
-        <Tabs selectedIndex={tabIndex} onSelect={false}>
-          {forecastOfDay.map(item => this.renderTabPanel(item, this.props.unit),
-          )}
-          <TabList style={{ display: 'none' }}>
-            {forecastOfDay.map(item => this.renderTab(item))}
-          </TabList>
-        </Tabs>
-        <div className='tab-container'>
-          <Slider
-            min={0}
-            max={forecastOfDay.length - 1}
-            value={tabIndex}
-            handle={this.handle}
-            onChange={e => this.onSlided(e)}
-            marks={this.marks}
-          />
-        </div>
+  return (
+    <div className={style['weather-banner-tab']}>
+      <div className='location-text'>{location}</div>
+      <Tabs selectedIndex={tabIndex} onSelect={false}>
+        {forecastOfDay.map(item => renderTabPanel(item, unit))}
+        <TabList style={{ display: 'none' }}>
+          {forecastOfDay.map(item => renderTab(item))}
+        </TabList>
+      </Tabs>
+      <div className='tab-container'>
+        <Slider
+          min={0}
+          max={forecastOfDay.length - 1}
+          value={tabIndex}
+          handle={handle}
+          onChange={e => onSlided(e)}
+          marks={marks}
+        />
       </div>
-    );
-  }
-}
+    </div>
+  );
+
+};
 
 export default WeatherBannerTab;
 

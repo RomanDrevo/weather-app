@@ -10,8 +10,6 @@ export function* getCityForecastSaga(data) {
 
     const result = yield call(getCityForecastApi, data.payload);
 
-    console.log(result);
-
     if (result.status === 200 && result.data) {
       yield put(setForecastResultToStore(result.data));
     }

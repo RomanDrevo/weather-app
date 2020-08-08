@@ -24,3 +24,11 @@ export const mapForecast = forecast => {
   });
   return forecastOfDayListArr;
 };
+
+export const getMarks = (forecastOfDay, locale) => {
+  const marks = {};
+  forecastOfDay.map((item, index) => {
+    marks[index] = item.moment.locale(locale).format('a h:mm');
+  });
+  return marks;
+};
