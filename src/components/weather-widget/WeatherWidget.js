@@ -1,122 +1,73 @@
-import React from 'react';
-import moment from 'moment';
+import React, { useState } from 'react';
 import WeatherBannerTab from '../weather-banner-tab/WeatherBannerTab';
 import MiniWeatherCard from '../mini-weather-card/MiniWeatherCard';
 import style from './WeatherWidget.module.scss';
+import { mapForecast } from '../../utils/helpers';
 
-class WeatherWidget extends React.Component {
+const WeatherWidget = ({ forecast, config }) => {
 
-  constructor(props) {
-    super(props);
-    const { forecast } = props;
-    console.log(forecast);
-    if (forecast) {
-      let firstMomentOfDay;
-      let forecastOfDay = [];
-      const forecastOfDayList = [];
-      forecast.map((item, index) => {
-        if (firstMomentOfDay === undefined) {
-          firstMomentOfDay = moment.unix(item.dt);
-          forecast[index].moment = firstMomentOfDay;
-          forecastOfDay.push(item);
-        } else {
-          const currentMoment = moment.unix(item.dt);
-          forecast[index].moment = currentMoment;
-          if (firstMomentOfDay.isSame(currentMoment, 'day')) {
-            forecastOfDay.push(item);
-          } else {
-            forecastOfDayList.push(forecastOfDay);
-            forecastOfDay = [];
-            forecastOfDay.push(item);
-            firstMomentOfDay = currentMoment;
-          }
-        }
-      });
-      this.state = { forecastIdx: 0, forecastOfDayList };
-    } else {
-      this.state = {};
-    }
-  }
+  const [forecastIdx, setForecastIdx] = useState(0);
+  const [forecastOfDayList, setForecastOfDayList] = useState(mapForecast(forecast));
 
-  renderEmpty() {
+  const renderEmpty = () => {
     return (
       <div>
         <h3>No forecast!? Check your props data!</h3>
       </div>
     );
+  };
+
+  if (!forecast) {
+    return renderEmpty();
   }
 
-  render() {
-    const { config, forecast } = this.props;
-    if (!forecast) {
-      return this.renderEmpty();
-    }
-    const forecastList = this.state.forecastOfDayList;
-    return (
-      <div className={style['weather-widget-wrapper']}>
-        <WeatherBannerTab
-          className=""
-          location={config.location}
-          forecastOfDay={forecastList[this.state.forecastIdx]}
+  const handleOnClick = index => {
+    setForecastIdx(index);
+  };
+
+  return (
+    <div className={style['weather-widget-wrapper']}>
+      <WeatherBannerTab
+        className=""
+        location={config.location}
+        forecastOfDay={forecastOfDayList[forecastIdx]}
+        unit={config.unit}
+        locale={config.locale}
+      />
+      <div className='next-container'>
+        <MiniWeatherCard
+          onClick={() => handleOnClick(0)}
+          forecastList={forecastOfDayList[0]}
           unit={config.unit}
           locale={config.locale}
         />
-        <div className='next-container'>
-          <MiniWeatherCard
-            onClick={() => this.setState({ forecastIdx: 0 })}
-            forecastList={forecastList[0]}
-            isSelected={this.state.forecastIdx === 0}
-            unit={config.unit}
-            locale={config.locale}
-          />
-          <MiniWeatherCard
-            onClick={() => this.setState({ forecastIdx: 1 })}
-            forecastList={forecastList[1]}
-            isSelected={this.state.forecastIdx === 1}
-            unit={config.unit}
-            locale={config.locale}
-          />
-          <MiniWeatherCard
-            onClick={() => this.setState({ forecastIdx: 2 })}
-            forecastList={forecastList[2]}
-            isSelected={this.state.forecastIdx === 2}
-            unit={config.unit}
-            locale={config.locale}
-          />
-          <MiniWeatherCard
-            onClick={() => this.setState({ forecastIdx: 3 })}
-            forecastList={forecastList[3]}
-            isSelected={this.state.forecastIdx === 3}
-            unit={config.unit}
-            locale={config.locale}
-          />
-          <MiniWeatherCard
-            onClick={() => this.setState({ forecastIdx: 4 })}
-            forecastList={forecastList[4]}
-            isSelected={this.state.forecastIdx === 4}
-            unit={config.unit}
-            locale={config.locale}
-          />
-        </div>
+        <MiniWeatherCard
+          onClick={() => handleOnClick(1)}
+          forecastList={forecastOfDayList[1]}
+          unit={config.unit}
+          locale={config.locale}
+        />
+        <MiniWeatherCard
+          onClick={() => handleOnClick(2)}
+          forecastList={forecastOfDayList[2]}
+          unit={config.unit}
+          locale={config.locale}
+        />
+        <MiniWeatherCard
+          onClick={() => handleOnClick(3)}
+          forecastList={forecastOfDayList[3]}
+          unit={config.unit}
+          locale={config.locale}
+        />
+        <MiniWeatherCard
+          onClick={() => handleOnClick(4)}
+          forecastList={forecastOfDayList[4]}
+          unit={config.unit}
+          locale={config.locale}
+        />
       </div>
-    );
-  }
-}
-
-// const ContentContainer = styled.div`
-//   display: block;
-//   margin: 10px 5px;
-//   text-align: left;
-//   border: 1px solid #dddddd;
-//   box-shadow: 3px 3px 3px #aaaaaa;
-//   padding: 1rem 1rem;
-// `;
-
-// const Next5Container = styled.div`
-//   display: flex;
-//   flex-direction: row;
-//   margin-top: 1rem;
-//   justify-content: space-around;
-// `;
+    </div>
+  );
+};
 
 export default WeatherWidget;

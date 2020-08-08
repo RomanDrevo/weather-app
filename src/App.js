@@ -38,6 +38,8 @@ const App = ({ getCityForecast, mappedForecastData, isLoading, setCity, city }) 
     getCityForecast(city);
   };
 
+  if (!mappedForecastData?.length > 0) return <h1>No Data</h1>;
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline/>

@@ -8,14 +8,12 @@ const initialState = {
 
 const forecastReducer = createReducer(initialState, {
   [actionsTypes.SET_FORECAST_RESULT_TO_STORE]: (state, {payload}) => {
-    console.log(payload);
     return {
       ...state,
       data: payload
     };
   },
   [actionsTypes.SET_CITY]: (state, {payload}) => {
-    console.log('payload : ', payload);
     return {
       ...state,
       city: payload
