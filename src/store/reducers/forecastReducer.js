@@ -2,7 +2,8 @@ import actionsTypes from '../actionsTypes';
 import createReducer from '../reducers/createReducer';
 
 const initialState = {
-  data: null
+  data: null,
+  city: 'Ashdod'
 };
 
 const forecastReducer = createReducer(initialState, {
@@ -13,7 +14,15 @@ const forecastReducer = createReducer(initialState, {
       data: payload
     };
   },
+  [actionsTypes.SET_CITY]: (state, {payload}) => {
+    console.log('payload : ', payload);
+    return {
+      ...state,
+      city: payload
+    };
+  },
 });
+
 
 export default forecastReducer;
 

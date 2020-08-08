@@ -1,5 +1,7 @@
 import { createSelector } from 'reselect';
 
+export const getCity = state => state?.forecastReducer?.city;
+
 export const getForecastData = state => state?.forecastReducer?.data;
 
 export const getMappedForecast = createSelector(getForecastData, (forecast) => {

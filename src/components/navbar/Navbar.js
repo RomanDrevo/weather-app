@@ -1,16 +1,11 @@
 import React  from 'react';
-import { AppBar, Toolbar, Select, MenuItem } from '@material-ui/core';
-
-import logo from '../../assets/about.png';
+import { Select, MenuItem } from '@material-ui/core';
 import style from './Navbar.module.scss';
 
-const NavBar = () => {
+const NavBar = ({onChange, city}) => {
 
-  const [city, setCity] = React.useState('');
-
-  const handleChange = (event) => {
-    console.log(event.target.value);
-    setCity(event.target.value);
+  const handleChange = event => {
+    onChange(event.target.value);
   };
 
   return (
@@ -23,9 +18,10 @@ const NavBar = () => {
           value={city}
           onChange={handleChange}
         >
-          <MenuItem value='ashdod'>Ashdod</MenuItem>
-          <MenuItem value='jerusalem'>Jerusalem</MenuItem>
-          <MenuItem value='haifa'>Haifa</MenuItem>
+          <MenuItem value='Ashdod'>Ashdod</MenuItem>
+          <MenuItem value='Jerusalem'>Jerusalem</MenuItem>
+          <MenuItem value='Haifa'>Haifa</MenuItem>
+          <MenuItem value='Tel Aviv'>Tel Aviv</MenuItem>
         </Select>
       </div>
     </div>

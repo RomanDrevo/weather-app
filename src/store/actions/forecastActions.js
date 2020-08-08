@@ -14,3 +14,10 @@ export const setForecastResultToStore = data =>{
   };
 };
 
+export const setCity = data =>{
+  return{
+    type: types.SET_CITY,
+    payload: data
+  };
+};
+

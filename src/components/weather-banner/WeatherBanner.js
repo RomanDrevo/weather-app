@@ -9,8 +9,6 @@ class WeatherBanner extends React.Component {
 
     const src = `http://openweathermap.org/img/wn/${data.icon}.png`;
 
-    console.log(data.icon);
-
     return (
       <div className={style['weather-banner-wrapper']}>
         <h5>
