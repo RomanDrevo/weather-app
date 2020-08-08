@@ -13,5 +13,5 @@ axios.interceptors.request.use(function (config) {
 });
 
 export const getCityForecastApi = city => {
-    return axios.get(`/forecast?q=${city}&APPID=${appKey}`);
+    return axios.get(`/forecast?q=${city}&APPID=${appKey}&units=metric`);
 };
