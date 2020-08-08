@@ -1,14 +1,12 @@
 import React from 'react';
 import moment from 'moment';
-import iconCodeMapping from '../../WeatherIcon';
 import style from './MiniWeatherCard.module.scss';
 
-const MiniWeatherCard = ({ onClick, forecastList, isSelected, unit, locale }) => {
+const MiniWeatherCard = ({ onClick, forecastList, unit, locale }) => {
   if (forecastList !== undefined && forecastList.length > 0) {
     const first = forecastList[0];
 
     const src = `http://openweathermap.org/img/wn/${first.icon}.png`;
-
 
     const maxAndMin = forecastList.reduce(
       (acc, current) => {
@@ -24,7 +22,7 @@ const MiniWeatherCard = ({ onClick, forecastList, isSelected, unit, locale }) =>
     );
     return (
       <div className={style['mini-weather-card-wrapper']}>
-        <div className='container' onClick={onClick} isSelected={isSelected}>
+        <div className='container' onClick={onClick}>
           <div className='text'>
             {moment
               .unix(first.dt)
@@ -45,39 +43,5 @@ const MiniWeatherCard = ({ onClick, forecastList, isSelected, unit, locale }) =>
   return <div />;
 };
 
-MiniWeatherCard.defaultProps = {
-  onClick: () => {},
-  isSelected: false,
-  unit: 'metric',
-  locale: 'zh-tw',
-};
-
-
 export default MiniWeatherCard;
 
-// const Root = styled.div`
-//   min-width: 20%;
-// `;
-
-// const Container = styled.div`
-//   overflow: hidden;
-//   display: flex;
-//   flex-direction: column;
-//   cursor: pointer;
-//   padding: 0.5rem 0.5rem;
-//   background: ${props => (props.isSelected ? '#F9F9F9' : 'inherit')};
-//   border: ${props => (props.isSelected ? '1px solid #DDDDDD' : 'none')};
-// `;
-
-// const Text = styled.div`
-//   text-align: center;
-//   line-height: normal;
-//   padding: 0.5rem 0rem;
-// `;
-
-// const Icon = styled.img`
-//   align-self: center;
-//   line-height: normal;
-//   width: 3rem;
-//   height: 3rem;
-// `;

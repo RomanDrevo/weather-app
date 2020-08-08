@@ -9,11 +9,12 @@ class WeatherWidget extends React.Component {
   constructor(props) {
     super(props);
     const { forecast } = props;
+    console.log(forecast);
     if (forecast) {
       let firstMomentOfDay;
       let forecastOfDay = [];
       const forecastOfDayList = [];
-      forecast.forEach((item, index) => {
+      forecast.map((item, index) => {
         if (firstMomentOfDay === undefined) {
           firstMomentOfDay = moment.unix(item.dt);
           forecast[index].moment = firstMomentOfDay;

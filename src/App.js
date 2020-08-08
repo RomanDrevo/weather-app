@@ -6,7 +6,7 @@ import NavBar from './components/navbar/Navbar';
 import { getCityForecast, setCity } from './store/actions/forecastActions';
 import { getCity, getMappedForecast, isLoading } from './store/selector';
 import WeatherWidget from './components/weather-widget/WeatherWidget';
-import Spinner from './components/Spinner';
+import Spinner from './components/spinner';
 
 const App = ({ getCityForecast, mappedForecastData, isLoading, setCity, city }) => {
   const theme = createMuiTheme({
