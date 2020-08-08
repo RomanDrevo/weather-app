@@ -10,12 +10,22 @@ import style from './WeatherBannerTab.module.scss';
 
 const {Handle} = Slider;
 
+// const reformanForecastDay = forecastOfDay => {
+//
+//   const marks = {};
+//
+//   forecastOfDay.map((item, index) => {
+//     marks[index] = item.moment.locale(locale).format('a h:mm');
+//   });
+//
+// }
+
 class WeatherBannerTab extends React.Component {
   constructor(props) {
     super(props);
     const { location, forecastOfDay, locale } = props;
     this.marks = {};
-    forecastOfDay.forEach((item, index) => {
+    forecastOfDay.map((item, index) => {
       this.marks[index] = item.moment.locale(locale).format('a h:mm');
     });
     this.state = { location, forecastOfDay, tabIndex: 0, locale };
@@ -100,11 +110,6 @@ class WeatherBannerTab extends React.Component {
     );
   }
 }
-
-WeatherBannerTab.defaultProps = {
-  unit: 'metric',
-  locale: 'zh-tw',
-};
 
 export default WeatherBannerTab;
 
