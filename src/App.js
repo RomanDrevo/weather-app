@@ -30,7 +30,7 @@ const App = ({ getCityForecast, mappedForecastData, isLoading, setCity, city }) 
   });
 
   useEffect(() => {
-    getCityForecast('jerusalem');
+    getCityForecast(city);
   }, []);
 
   const handleOnChange = city => {

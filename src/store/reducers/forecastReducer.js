@@ -21,6 +21,5 @@ const forecastReducer = createReducer(initialState, {
   },
 });
 
-
 export default forecastReducer;
 
