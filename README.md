@@ -8,7 +8,9 @@ This project builds a Weather App with clickable daily forecast.
 
 1. Grab the repo
 
-2. Under the directory, use npm for yarn
+2. Add a file at the root of the project called `.env.local`
+
+3. Under the directory, use npm for yarn
 
   `npm install`
   
@@ -16,7 +18,7 @@ This project builds a Weather App with clickable daily forecast.
   
   `yarn install`
   
-3. Use the start command to start up a server then widget should pop in a new tab of your browser.
+4. Use the start command to start up a server then widget should pop in a new tab of your browser.
 
   `npm start`
   
