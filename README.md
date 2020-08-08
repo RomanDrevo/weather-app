@@ -1,6 +1,6 @@
 # React Weather Widget
 
-This project builds a Weather Widget using React 
+This project builds a Weather App with clickable daily forecast. 
 
 
 
